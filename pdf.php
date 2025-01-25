@@ -1,29 +1,28 @@
 <?php
-require('fpdf/fpdf.php');
+include 'db.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $phone = htmlspecialchars($_POST['phone']);
-    $skills = htmlspecialchars($_POST['skills']);
-    $education = htmlspecialchars($_POST['education']);
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM cvs WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $pdf = new FPDF();
-    $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', 16);
+    if ($result->num_rows > 0) {
+        $cv = $result->fetch_assoc();
+        echo "<h1>CV Details</h1>";
+        echo "<p><strong>Name:</strong> " . $cv['name'] . "</p>";
+        echo "<p><strong>Email:</strong> " . $cv['email'] . "</p>";
+        echo "<p><strong>Phone:</strong> " . $cv['phone'] . "</p>";
+        echo "<p><strong>Address:</strong> " . $cv['address'] . "</p>";
+        echo "<p><strong>Experience:</strong> " . $cv['experience'] . "</p>";
+        echo "<p><strong>Skills:</strong> " . $cv['skills'] . "</p>";
 
-    $pdf->Cell(0, 10, 'CV', 0, 1, 'C');
-    $pdf->Ln(10);
-
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 10, "Name: $name", 0, 1);
-    $pdf->Cell(0, 10, "Email: $email", 0, 1);
-    $pdf->Cell(0, 10, "Phone: $phone", 0, 1);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 10, "Skills: $skills");
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 10, "Education: $education");
-
-    $pdf->Output('D', 'CV.pdf'); 
+        echo "<a href='delete.php?delete_id=" . $cv['id'] . "'>Delete</a>";
+        echo "<a href='form.html'>Add New</a>";
+    } else {
+        echo "CV not found.";
+    }
 }
 ?>

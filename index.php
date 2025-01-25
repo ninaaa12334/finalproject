@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Andev Web</title>
+	<title>write your cv</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -31,20 +31,22 @@ body{
 	position: relative;
 	width:100%;
 	height: 100%;
+	
 }
 label{
 	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
-	margin: 60px;
+	margin: 40px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: .5s ease-in-out;
 }
 input{
-	width: 60%;
-	height: 20px;
+	
+	width: 70%;
+	height: 25px;
 	background: #e0dede;
 	justify-content: center;
 	display: flex;
@@ -64,12 +66,13 @@ button{
 	background: #573b8a;
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 14px;
 	outline: none;
 	border: none;
 	border-radius: 5px;
 	transition: .2s ease-in;
 	cursor: pointer;
+	
 }
 button:hover{
 	background: #6d44b8;
@@ -95,6 +98,13 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+#skills{
+	
+}
+.page2 input{
+	height: 50px;
+}
+
              </style>                            
             
 </head>
@@ -104,20 +114,24 @@ button:hover{
 
 			<div class="signup">
 				<form>
-					<label for="chk" aria-hidden="true">Registrarse</label>
-					<input type="text" name="txt" placeholder="Tú Nombre" required="">
-					<input type="email" name="email" placeholder="Correo" required="">
-					<input type="password" name="pswd" placeholder="Contraseña" required="">
-					<button>Registrarse</button>
+					<label for="chk" aria-hidden="true">CV</label>
+					<input type="text" name="txt" placeholder="Name" required="">
+					<input type="text" name="txt" placeholder="Surname" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="text" name="phone" placeholder="Phone" required="">
+					
 				</form>
 			</div>
 
 			<div class="login">
 				<form>
-					<label for="chk" aria-hidden="true">Inicio</label>
-					<input type="email" name="email" placeholder="Correo" required="">
-					<input type="password" name="pswd" placeholder="Contraseña" required="">
-					<button>Iniciar</button>
+					<label for="chk" aria-hidden="true">More</label>
+					<div class="page2">
+					<input id=" skills" type="text" name="txt" placeholder="Skills" required="">
+					<input type="text" name="txt" placeholder="Experience" required="">
+					<input type="text" name="txt" placeholder="Education" required="">
+</div>
+					<button>Generate cv</button>
 				</form>
 			</div>
 	</div>
