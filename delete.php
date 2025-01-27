@@ -1,12 +1,17 @@
 <?php
-require 'db.php';
+include 'db.php';
 
-$id = $_GET['id'];
-$sql = "DELETE FROM cvs WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Ensure ID is an integer
+    $sql = "DELETE FROM cvs WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
 
-header('Location: index.php');
-exit();
+    if ($stmt->execute()) {
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
 ?>
